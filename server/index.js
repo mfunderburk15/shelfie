@@ -10,6 +10,7 @@ app.use(express.json())
 
 
 app.get('/api/inventory', shelfCtrl.getInventory)
+app.post('/api/product', shelfCtrl.createProduct)
 
 massive({
     connectionString: CONNECTION_STRING,

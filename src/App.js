@@ -10,9 +10,14 @@ export default class App extends Component {
     this.state = {
       inventory: [],
     }
+    this.getInventory = this.getInventory.bind(this)
   }
 
   componentDidMount() {
+    this.getInventory()
+  }
+
+  getInventory() {
     Axios.get('/api/inventory').then((response) => {
       this.setState({
         inventory: response.data
@@ -29,7 +34,9 @@ export default class App extends Component {
         <Dashboard
           inventory={inventory}
         />
-        <Form />
+        <Form
+          getInventory={this.getInventory}
+        />
       </div>
     )
   }

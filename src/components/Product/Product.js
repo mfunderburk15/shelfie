@@ -15,7 +15,7 @@ export default class Product extends Component {
             <div>
                 <img src={imgurl} />
                 <p>{name}</p>
-                <p>{price}</p>
+                <p>${price}</p>
             </div>
         )
     }
