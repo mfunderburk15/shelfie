@@ -9,9 +9,12 @@ export default class Product extends Component {
     }
 
     render() {
+        const { name, price, img } = this.props.data
         return (
             <div>
-                This is Product.js
+                <img src={img} />
+                <p>{name}</p>
+                <p>{price}</p>
             </div>
         )
     }

@@ -12,10 +12,17 @@ export default class App extends Component {
   }
 
   render() {
+    const { inventory } = this.state
+
     return (
       <div className="App">
         <Header />
-        <Dashboard />
+        <Dashboard
+          inventory={inventory}
+          name={inventory.name}
+          price={inventory.price}
+          img={inventory.img}
+        />
         <Form />
       </div>
     )
