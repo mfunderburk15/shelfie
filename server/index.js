@@ -9,6 +9,8 @@ const app = express()
 app.use(express.json())
 
 
+app.get('/api/inventory', shelfCtrl.getInventory)
+
 massive({
     connectionString: CONNECTION_STRING,
     ssl: {
