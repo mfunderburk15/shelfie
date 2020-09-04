@@ -9,10 +9,11 @@ export default class Product extends Component {
     }
 
     render() {
-        const { name, price, img } = this.props.data
+        console.log(this.props)
+        const { name, price, imgurl } = this.props.data
         return (
             <div>
-                <img src={img} />
+                <img src={imgurl} />
                 <p>{name}</p>
                 <p>{price}</p>
             </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios'
 import Dashboard from './components/Dashboard/Dashboard'
 import Form from './components/Form/Form'
 import Header from './components/Header/Header'
@@ -11,6 +12,14 @@ export default class App extends Component {
     }
   }
 
+  componentDidMount() {
+    Axios.get('/api/inventory').then((response) => {
+      this.setState({
+        inventory: response.data
+      })
+    })
+  }
+
   render() {
     const { inventory } = this.state
 
@@ -19,9 +28,6 @@ export default class App extends Component {
         <Header />
         <Dashboard
           inventory={inventory}
-          name={inventory.name}
-          price={inventory.price}
-          img={inventory.img}
         />
         <Form />
       </div>
