@@ -14,5 +14,24 @@ module.exports = {
         db.create_product([name, price, imgurl]).then((product) => {
             response.status(200).send(product)
         })
+    },
+    deleteProduct: (request, response) => {
+
+        const { id } = request.params
+
+        const db = request.app.get('db')
+
+        db.delete_product([id]).then(() => {
+            response.sendStatus(200)
+        })
+    },
+    editProduct: (request, response) => {
+        const { id } = request.params
+        const { name, price, imgurl } = request.body
+        const db = request.app.get('db')
+        db.edit_product([id]).then(() => {
+            response.sendStatus(200)
+        })
     }
+
 }

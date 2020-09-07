@@ -10,12 +10,18 @@ export default class Product extends Component {
 
     render() {
         console.log(this.props)
-        const { name, price, imgurl } = this.props.data
+        const { id, name, price, imgurl } = this.props.data
         return (
             <div>
                 <img src={imgurl} />
-                <p>{name}</p>
-                <p>${price}</p>
+                <div>
+                    <p>{name}</p>
+                    <p>${price}</p>
+                </div>
+                <div>
+                    <button onClick={() => this.props.deleteProduct(id)}>Delete</button>
+                    <button onClick={() => this.props.editProduct(this.props.data)}>Edit</button>
+                </div>
             </div>
         )
     }

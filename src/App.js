@@ -9,8 +9,10 @@ export default class App extends Component {
     super()
     this.state = {
       inventory: [],
+      currentProduct: {}
     }
     this.getInventory = this.getInventory.bind(this)
+    this.editProduct = this.editProduct.bind(this)
   }
 
   componentDidMount() {
@@ -25,6 +27,12 @@ export default class App extends Component {
     })
   }
 
+  editProduct(product) {
+    this.setState({
+      currentProduct: product
+    })
+  }
+
   render() {
     const { inventory } = this.state
 
@@ -33,9 +41,13 @@ export default class App extends Component {
         <Header />
         <Dashboard
           inventory={inventory}
+          getInventory={this.getInventory}
+          editProduct={this.editProduct}
         />
         <Form
+          product={this.state.currentProduct}
           getInventory={this.getInventory}
+          editProduct={this.editProduct}
         />
       </div>
     )
