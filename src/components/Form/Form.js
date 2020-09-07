@@ -1,23 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Axios from 'axios';
+import { withRouter } from 'react-router-dom'
 
 
-export default class Form extends Component {
+class Form extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            id: null,
             name: '',
             price: 0,
-            imgurl: ''
+            imgurl: '',
+            edit: false
+        }
+    }
+
+    componentDidMount() {
+        let { id } = this.props.match.params
+        if (id) {
+            Axios.get(`/api/product/${id}`)
+                .then(response => {
+                    this.setState({
+                        ...response.data, edit: true
+                    })
+                    console.log(response.data)
+                })
         }
     }
 
     componentDidUpdate(oldProps) {
         console.log(this.props)
-        let { id, name, price, imgurl } = this.props.product
-        if (oldProps.product.id !== this.props.product.id) {
-            this.setState({ id, name, price, imgurl, edit: true })
+        if (this.props.match.path !== oldProps.match.path) {
+            this.setState({
+                name: '',
+                price: 0,
+                img: ''
+            })
         }
     }
 
@@ -37,40 +54,37 @@ export default class Form extends Component {
         let { name, price, imgurl } = this.state;
         let product = { name, price, imgurl }
         Axios.post('/api/product', product)
-            .then(res => {
-                this.props.getInventory()
-                this.onCancel()
+            .then(response => {
+                this.props.history.push('/')
             })
-            .catch(err => console.log('There was an error creating this product', err))
+            .catch(error => console.log('There was an error creating this product', error))
     }
 
     onCancel() {
-        if (this.state.id) {
-            this.props.editProduct({})
+        if (this.props.match.params.id) {
+            this.props.history.push('/')
+        } else {
+            this.setState({
+                name: '',
+                price: 0,
+                imgurl: '',
+                edit: false
+            })
         }
-        this.setState({
-            id: null,
-            name: '',
-            price: 0,
-            imgurl: ''
-        })
     }
 
     handleEdit() {
         let { id, name, price, imgurl } = this.state;
-        if (name) {
-            let product = {
-                name,
-                price,
-                imgurl
-            }
-            Axios.put(`/api/product/${id}`, product)
-                .then(response => {
-                    this.props.getInventory();
-                    this.onCancel();
-                })
-                .catch(error => console.log(error))
+        let product = {
+            name,
+            price,
+            imgurl
         }
+        Axios.put(`/api/product/${id}`, product)
+            .then(response => {
+                this.props.history.push('/')
+            })
+            .catch(error => console.log(error))
     }
 
 
@@ -86,12 +100,14 @@ export default class Form extends Component {
                 <input type='text' pattern="[0-9]*" value={this.state.price} onChange={e => this.handlePrice(e.target.value)} />
                 <div className='form_button_box'>
                     <button onClick={() => this.onCancel()}>Cancel</button>
-                    {this.state.id
-                        ? <button onClick={_ => this.handleEdit()}>Save Changes</button>
-                        : <button onClick={_ => this.handleSubmit()}>Add to Inventory</button>
+                    {this.state.edit
+                        ? <button onClick={() => this.handleEdit()}>Save Changes</button>
+                        : <button onClick={() => this.handleSubmit()}>Add to Inventory</button>
                     }
                 </div>
             </div>
-        );
+        )
     }
 }
+
+export default withRouter(Form)

@@ -1,35 +1,40 @@
-import React, { Component } from 'react'
-import Axios from 'axios'
-import Product from '../Product/Product'
+import React, { Component } from 'react';
+import axios from 'axios';
+import Product from '../Product/Product';
+import { withRouter } from 'react-router-dom'
 
-export default class Dashboard extends Component {
-    constructor() {
-        super()
+
+
+class Dashboard extends Component {
+    constructor(props) {
+        super(props);
         this.state = {
-
+            inventory: []
         }
-        this.deleteProduct = this.deleteProduct.bind(this)
+        this.getInventory = this.getInventory.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
     }
-
+    componentDidMount() {
+        this.getInventory();
+    }
+    getInventory() {
+        axios.get('/api/inventory')
+            .then(response => this.setState({ inventory: response.data }))
+    }
     deleteProduct(id) {
-        Axios.delete(`/api/product/${id}`)
-            .then(response => this.props.getInventory())
-            .catch(error => console.log('There was an error deleting this product'))
+        axios.delete(`/api/product/${id}`)
+            .then(response => this.getInventory())
+            .catch(error => console.log(error))
     }
-
     render() {
-        const { inventory } = this.props
         return (
-            <div>
-                {inventory.map(element => {
-                    return <Product
-                        key={element.id}
-                        data={element}
-                        deleteProduct={this.deleteProduct}
-                        editProduct={this.props.editProduct}
-                    />
+            <div className='dashboard'>
+                {this.state.inventory.map((element) => {
+                    return <Product key={element.id} data={element} deleteProduct={this.deleteProduct} />
                 })}
             </div>
-        )
+        );
     }
 }
+
+export default withRouter(Dashboard)

@@ -1,28 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { withRouter } from 'react-router-dom'
 
-export default class Product extends Component {
-    constructor() {
-        super()
-        this.state = {
-
-        }
-    }
-
-    render() {
-        console.log(this.props)
-        const { id, name, price, imgurl } = this.props.data
-        return (
-            <div>
-                <img src={imgurl} />
-                <div>
-                    <p>{name}</p>
-                    <p>${price}</p>
-                </div>
-                <div>
-                    <button onClick={() => this.props.deleteProduct(id)}>Delete</button>
-                    <button onClick={() => this.props.editProduct(this.props.data)}>Edit</button>
-                </div>
+function Product(props) {
+    console.log(props.history)
+    let { id, name, price, imgurl } = props.data;
+    return (
+        <div className='Product'>
+            <img src={imgurl} />
+            <div className='product_box'>
+                <p className='product_title'>{name}</p>
+                <p className='product_price'>${price}</p>
             </div>
-        )
-    }
+            <div className='product_button_box'>
+                <button onClick={() => props.deleteProduct(id)}>Delete</button>
+                <button onClick={() => props.history.push(`/edit/${props.data.id}`)}>Edit</button>
+            </div>
+        </div>
+    )
 }
+
+export default withRouter(Product)
