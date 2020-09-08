@@ -37,9 +37,10 @@ module.exports = {
     editProduct: (request, response) => {
         const { id } = request.params
         const { name, price, imgurl } = request.body
+
         const db = request.app.get('db')
-        db.edit_product([id]).then(() => {
-            response.sendStatus(200)
+        db.edit_product([id, name, price, imgurl]).then((product) => {
+            response.status(200).send(product)
         })
     }
 

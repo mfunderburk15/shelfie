@@ -2,7 +2,6 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 function Product(props) {
-    console.log(props.history)
     let { id, name, price, imgurl } = props.data;
     return (
         <div className='Product'>

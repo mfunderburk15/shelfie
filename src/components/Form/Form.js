@@ -15,12 +15,13 @@ class Form extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.match)
         let { id } = this.props.match.params
         if (id) {
             Axios.get(`/api/product/${id}`)
                 .then(response => {
                     this.setState({
-                        ...response.data, edit: true
+                        ...response.data[0], edit: true
                     })
                     console.log(response.data)
                 })
