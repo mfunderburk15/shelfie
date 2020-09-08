@@ -1,4 +1,8 @@
-
+.App{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .header{
     height: 10.5vh;
     width: 100vw;
@@ -51,6 +55,7 @@ margin-left: 75px;
     background-color: #d34735;
     border-radius: 7px;
     display: flex;
+    margin: 10px;
 }
 
 .product-img{
@@ -83,6 +88,66 @@ margin-left: 75px;
     background: none;
     background-color: #3ad886;
     padding: 10px;
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    font-weight: 700;
+}
+
+.image-preview{
+    width: 320px;
+    height: 200px;
+    display: flex;
+    align-self: center;
+    margin-bottom: 50px;
+}
+
+.form{
+    height: 580px;
+    width:510px;
+    padding: 15px;
+    border-radius: 7px;
+    background-color: #3ad886;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: flex-end;
+    margin-top: 60px;
+}
+
+.form-info > input {
+    width: 100%;
+    padding: 2px;
+    margin: 7px 0;
+    font-family: sans-serif;
+    font-weight: bold;
+
+}
+
+.form-info > p {
+    width: 420px;
+    height:20px;
+    margin: 7px 0;
+    font-size: 20px;
+    font-family: sans-serif;
+
+}
+
+.form-buttons{
+    width: 100%;
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-self: flex-end;
+}
+
+.form-button{
+    font-size:16px;
+    font-family: sans-serif;
+    background: none;
+    background-color: #ED6B5A;
+    padding: 10px;
+    margin: 5px 10px;
     border-radius: 7px;
     outline: none;
     border: none;

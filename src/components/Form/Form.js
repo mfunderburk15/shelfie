@@ -91,19 +91,21 @@ class Form extends Component {
 
     render() {
         return (
-            <div className='Form'>
-                <img src={this.state.imgurl} />
-                <p>Image URL:</p>
-                <input type='text' value={this.state.imgurl} onChange={e => this.handleImage(e.target.value)} />
-                <p>Product Name:</p>
-                <input type='text' value={this.state.name} onChange={e => this.nameInput(e.target.value)} />
-                <p>Price:</p>
-                <input type='text' pattern="[0-9]*" value={this.state.price} onChange={e => this.handlePrice(e.target.value)} />
-                <div className='form_button_box'>
-                    <button onClick={() => this.onCancel()}>Cancel</button>
+            <div className='form'>
+                <img className='image-preview' src={this.state.imgurl} />
+                <div className='form-info'>
+                    <p>Image URL:</p>
+                    <input type='text' value={this.state.imgurl} onChange={e => this.handleImage(e.target.value)} />
+                    <p>Product Name:</p>
+                    <input type='text' value={this.state.name} onChange={e => this.nameInput(e.target.value)} />
+                    <p>Price:</p>
+                    <input type='text' pattern="[0-9]*" value={this.state.price} onChange={e => this.handlePrice(e.target.value)} />
+                </div>
+                <div className='form-buttons'>
+                    <button className='form-button' onClick={() => this.onCancel()}>Cancel</button>
                     {this.state.edit
-                        ? <button onClick={() => this.handleEdit()}>Save Changes</button>
-                        : <button onClick={() => this.handleSubmit()}>Add to Inventory</button>
+                        ? <button className='form-button' onClick={() => this.handleEdit()}>Save Changes</button>
+                        : <button className='form-button' onClick={() => this.handleSubmit()}>Add to Inventory</button>
                     }
                 </div>
             </div>
