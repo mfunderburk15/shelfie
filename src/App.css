@@ -1,0 +1,40 @@
+
+.header{
+    height: 10.5vh;
+    width: 100vw;
+    background-color: #AB2A19;
+    display: flex;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.header > h1{
+    font-size: 30px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+.header_nav{
+width: 270px;   
+font-size: 18px;
+display: flex;
+justify-content: space-between;
+margin-left: 75px;
+}
+
+.link{
+    text-decoration: none;
+    padding: 10px 12px;
+    color: #000000;
+    background-color: #ED6B5A;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.icon{
+    width: 50px;
+    height: 50px;
+    margin-left: 75px;
+    margin-right: 25px;
+}
+
